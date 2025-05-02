@@ -1,13 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API = axios.create({
-  baseURL: "http://localhost:10000/api",
-});
+const API_URL = 'http://localhost:10000/api/pets';
 
-export const getPets = () => API.get("/pets");
-export const getPet = (id) => API.get(`/pets/${id}`);
-export const addPet = (pet) => API.post("/pets", pet);
-export const updatePet = (id, pet) => API.put(`/pets/${id}`, pet);
-export const deletePet = (id) => API.delete(`/pets/${id}`);
-export const adoptPet = (id) => API.patch(`/pets/${id}/adopt`);
-export const filterByMood = (mood) => API.get(`/pets/filter?mood=${mood}`);
+export const getAllPets = () => axios.get(API_URL);
+export const addPet = (data) => axios.post(API_URL, data);
+export const adoptPet = (id) => axios.patch(`${API_URL}/${id}/adopt`);
+export const updatePet = (id, data) => axios.put(`${API_URL}/${id}`, data);
+export const deletePet = (id) => axios.delete(`${API_URL}/${id}`);
+export const filterPetsByMood = (mood) => axios.get(`${API_URL}?mood=${mood}`);
