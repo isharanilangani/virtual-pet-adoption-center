@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaSmile, FaMeh, FaFrown, FaEdit, FaTrash, FaCheck } from 'react-icons/fa';
-import './PetCard.css';
+import '../styles/global.css';
 
 const moodIcons = {
   Happy: <FaSmile className="text-success" />,
