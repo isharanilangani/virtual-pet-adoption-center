@@ -1,42 +1,33 @@
-// Map pet mood to color
+import { FaSmile, FaMeh, FaFrown } from 'react-icons/fa';
+
+// Map moods to icons
+export const moodIcons = {
+  Happy: <FaSmile className="text-success" />,
+  Excited: <FaMeh className="text-warning" />,
+  Sad: <FaFrown className="text-danger" />
+};
+
+// Get mood icon based on the mood
+export const getMoodIcon = (mood) => {
+  return moodIcons[mood] || <FaMeh className="text-secondary" />;
+};
+
+// Get mood color class
 export const getMoodColor = (mood) => {
-    switch (mood.toLowerCase()) {
-      case 'happy':
-        return 'success';
-      case 'sad':
-        return 'danger'; 
-      case 'playful':
-        return 'warning';
-      case 'calm':
-        return 'info'; 
-      default:
-        return 'secondary';
-    }
-  };
-  
-  // Map mood to icon (you can use emoji or icons from a library like FontAwesome)
-  export const getMoodIcon = (mood) => {
-    switch (mood.toLowerCase()) {
-      case 'happy':
-        return '😊';
-      case 'sad':
-        return '😢';
-      case 'playful':
-        return '🐾';
-      case 'calm':
-        return '😌';
-      default:
-        return '❓';
-    }
-  };
-  
-  // Sort pets by name (ascending)
-  export const sortPetsByName = (pets) => {
-    return [...pets].sort((a, b) => a.name.localeCompare(b.name));
-  };
-  
-  // Sort pets by mood (alphabetically)
-  export const sortPetsByMood = (pets) => {
-    return [...pets].sort((a, b) => a.mood.localeCompare(b.mood));
-  };
-  
+  switch (mood) {
+    case 'Happy': return 'success';
+    case 'Excited': return 'warning';
+    case 'Sad': return 'danger';
+    default: return 'secondary';
+  }
+};
+
+// Sort pets by name (alphabetically)
+export const sortPetsByName = (pets) => {
+  return [...pets].sort((a, b) => a.name.localeCompare(b.name));
+};
+
+// Filter pets by mood
+export const filterPetsByMood = (pets, mood) => {
+  return mood ? pets.filter(p => p.mood === mood) : pets;
+};
