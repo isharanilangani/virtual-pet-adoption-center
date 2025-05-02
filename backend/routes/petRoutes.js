@@ -9,5 +9,6 @@ router.put('/pets/:id', controller.updatePet);
 router.patch('/pets/:id/adopt', controller.adoptPet);
 router.delete('/pets/:id', controller.deletePet);
 router.get('/pets/filter', controller.filterByMood);
+router.get('/pets/filter/personality', controller.filterPetsByPersonality);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const AddPetForm = ({ onAdd }) => {
   });
 
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -17,9 +17,11 @@ const AddPetForm = ({ onAdd }) => {
     onAdd();
   };
 
+  const personalityOptions = ['Calm', 'Playful', 'Shy', 'Energetic', 'Friendly'];
+
   return (
     <form onSubmit={handleSubmit} className="row g-2 mb-4">
-      {['name', 'species', 'age', 'personality'].map((field) => (
+      {['name', 'species', 'age'].map((field) => (
         <div key={field} className="col-md-3">
           <input
             type={field === 'age' ? 'number' : 'text'}
@@ -32,6 +34,23 @@ const AddPetForm = ({ onAdd }) => {
           />
         </div>
       ))}
+
+      {/* Personality dropdown */}
+      <div className="col-md-3">
+        <select
+          name="personality"
+          value={formData.personality}
+          onChange={handleChange}
+          className="form-control"
+          required
+        >
+          <option value="" disabled>Select Personality</option>
+          {personalityOptions.map((option) => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+      </div>
+
       <div className="col-md-3">
         <button type="submit" className="btn btn-success w-100">Add Pet</button>
       </div>
