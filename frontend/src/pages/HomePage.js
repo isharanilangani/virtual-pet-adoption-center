@@ -2,15 +2,16 @@ import React, { useState, useEffect, useCallback } from 'react';
 import AddPetForm from '../components/AddPetForm';
 import FilterBar from '../components/FilterBar';
 import PetList from '../components/PetList';
+import PersonalityQuiz from '../components/PersonalityQuiz';
 import { getAllPets, adoptPet, deletePet, updatePet } from '../services/api';
 import { filterPetsByMood, sortPetsByName } from '../utils/helpers';
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
   const [selectedMood, setSelectedMood] = useState('');
+  const [matchedPersonality, setMatchedPersonality] = useState(null);
   const moods = ['Happy', 'Excited', 'Sad'];
 
-  // Fetch pets based on selected mood
   const fetchPets = useCallback(async () => {
     try {
       const res = selectedMood ? await filterPetsByMood(selectedMood) : await getAllPets();
@@ -25,12 +26,10 @@ const HomePage = () => {
     }
   }, [selectedMood]);
 
-  // Fetch pets whenever the selected mood changes
   useEffect(() => {
     fetchPets();
   }, [selectedMood, fetchPets]);
 
-  // Handlers for pet actions
   const handleAdopt = useCallback(async (id) => {
     await adoptPet(id);
     fetchPets();
@@ -46,9 +45,22 @@ const HomePage = () => {
     fetchPets();
   }, [fetchPets]);
 
+  const handleMatch = (personality) => {
+    setMatchedPersonality(personality);
+    console.log('Matched personality:', personality);
+  };
+
   return (
     <div className="container my-4">
       <h2 className="mb-4">Pet Adoption Center</h2>
+      <PersonalityQuiz onMatch={handleMatch} />
+
+      {matchedPersonality && (
+        <div className="alert alert-info mt-3">
+          Your matched personality is: <strong>{matchedPersonality}</strong>
+        </div>
+      )}
+
       <AddPetForm onAdd={fetchPets} />
       <FilterBar moods={moods} selectedMood={selectedMood} onSelectMood={setSelectedMood} />
       <PetList

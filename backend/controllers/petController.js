@@ -82,3 +82,14 @@ exports.filterByMood = async (req, res) => {
     res.status(500).json({ error: 'Server Error' });
   }
 };
+
+exports.filterPetsByPersonality = async (req, res) => {
+  try {
+    const { personality } = req.query;
+    const filtered = await service.filterPetsByPersonality(personality);
+    res.json(filtered);
+  } catch (error) {
+    console.error('Error in filterPetsByPersonality:', error.message);
+    res.status(500).json({ error: 'Server Error' });
+  }
+};
