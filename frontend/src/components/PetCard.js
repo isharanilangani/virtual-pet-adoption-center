@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import { FaSmile, FaMeh, FaFrown, FaEdit, FaTrash, FaCheck } from 'react-icons/fa';
-import './PetCard.css';
+import { FaEdit, FaTrash, FaCheck } from 'react-icons/fa';
+import { getMoodIcon } from '../utils/helpers';
+import '../styles/global.css';
 
-const moodIcons = {
-  Happy: <FaSmile className="text-success" />,
-  Excited: <FaMeh className="text-warning" />,
-  Sad: <FaFrown className="text-danger" />,
-};
-
-const PetCard = ({ pet, onAdopt, onDelete, onUpdate }) => {
+const PetCard = React.memo(({ pet, onAdopt, onDelete, onUpdate }) => {
   const [editing, setEditing] = useState(false);
   const [editData, setEditData] = useState({ name: pet.name, personality: pet.personality });
 
   const handleEditChange = (e) => {
-    setEditData({...editData, [e.target.name]: e.target.value});
+    setEditData({ ...editData, [e.target.name]: e.target.value });
   };
 
   const handleUpdate = () => {
@@ -35,7 +30,7 @@ const PetCard = ({ pet, onAdopt, onDelete, onUpdate }) => {
             <h5>{pet.name}</h5>
             <p>Species: {pet.species}</p>
             <p>Personality: {pet.personality}</p>
-            <p>Mood: {moodIcons[pet.mood]} {pet.mood}</p>
+            <p>Mood: {getMoodIcon(pet.mood)} {pet.mood}</p>
             <p className={`fw-bold ${pet.adopted ? 'text-muted' : 'text-success'}`}>Status: {pet.adopted ? 'Adopted' : 'Available'}</p>
             <div className="d-flex gap-2">
               {!pet.adopted && (
@@ -49,6 +44,6 @@ const PetCard = ({ pet, onAdopt, onDelete, onUpdate }) => {
       </div>
     </div>
   );
-};
+});
 
 export default PetCard;
