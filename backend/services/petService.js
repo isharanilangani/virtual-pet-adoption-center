@@ -35,14 +35,6 @@ const filterPetsByMood = async (mood) => {
     .filter(pet => pet.mood.toLowerCase() === mood.toLowerCase());
 };
 
-
-const filterPetsByPersonality = async (personality) => {
-  const pets = await Pet.find();
-  return pets
-    .map(pet => ({ ...pet.toObject(), mood: calculateMood(pet.createdAt) }))
-    .filter(pet => pet.personality?.toLowerCase() === personality.toLowerCase());
-};
-
 const filterPetsByPersonality = async (personality) => {
   const pets = await Pet.find();
   return pets
