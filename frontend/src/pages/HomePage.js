@@ -11,7 +11,9 @@ import {
   filterPetsByPersonality,
   filterPetsByMood,
 } from "../services/api";
-import { sortPetsByName } from "../utils/helpers";
+import { sortPetsByName, checkForSadPets } from "../utils/helpers";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
@@ -79,11 +81,14 @@ const HomePage = () => {
     }
   };
 
+  useEffect(() => {
+    checkForSadPets(pets); // Check for sad pets when pets data changes
+  }, [pets]);
+
   return (
     <div className="container my-4">
       <h2 className="mb-4">Pet Adoption Center</h2>
       <PersonalityQuiz onMatch={handleMatch} />
-
       {matchedPersonality && (
         <button
           className="btn btn-outline-secondary mt-2"
@@ -112,6 +117,7 @@ const HomePage = () => {
           onUpdate={handleUpdate}
         />
       )}
+      <ToastContainer /> {/* This is where the toast notifications will show */}
     </div>
   );
 };

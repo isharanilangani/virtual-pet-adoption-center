@@ -1,4 +1,5 @@
 import { FaSmile, FaMeh, FaFrown } from 'react-icons/fa';
+import { toast } from "react-toastify";
 
 // Map moods to icons
 export const moodIcons = {
@@ -25,6 +26,17 @@ export const getMoodColor = (mood) => {
 // Sort pets by name (alphabetically)
 export const sortPetsByName = (pets) => {
   return [...pets].sort((a, b) => a.name.localeCompare(b.name));
+};
+
+//Make notification for sad mood
+export const checkForSadPets = (pets) => {
+  pets.forEach((pet) => {
+    if (pet.mood === "Sad") {
+      toast.warning(`${pet.name} has become Sad!`, {
+        position: "top-right",
+      });
+    }
+  });
 };
 
 
