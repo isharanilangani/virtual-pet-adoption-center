@@ -1,6 +1,5 @@
-const calculateMood = (createdAt, adoption_date) => {
-  // If the pet is adopted, no mood is needed
-  if (adoption_date) return null;
+const calculateMood = (createdAt, adopted) => {
+  if (adopted) return 'Happy'; // Always happy if adopted
 
   const diffInMs = new Date() - new Date(createdAt);
   const diffInDays = diffInMs / (1000 * 60 * 60 * 24);

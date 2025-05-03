@@ -5,13 +5,13 @@ const getAllPets = async () => {
   const pets = await Pet.find();
   return pets.map(pet => ({
     ...pet.toObject(),
-    mood: calculateMood(pet.createdAt),
+    mood: calculateMood(pet.createdAt, pet.adopted),
   }));
 };
 
 const getPetById = async (id) => {
   const pet = await Pet.findById(id);
-  return { ...pet.toObject(), mood: calculateMood(pet.createdAt) };
+  return { ...pet.toObject(), mood: calculateMood(pet.createdAt, pet.adopted) };
 };
 
 const addPet = async (data) => await Pet.create(data);
@@ -29,7 +29,7 @@ const filterPetsByMood = async (mood) => {
 
   return pets
     .map(pet => {
-      const petMood = calculateMood(pet.createdAt);
+      const petMood = calculateMood(pet.createdAt, pet.adopted);
       return { ...pet.toObject(), mood: petMood };
     })
     .filter(pet => pet.mood.toLowerCase() === mood.toLowerCase());
@@ -38,7 +38,7 @@ const filterPetsByMood = async (mood) => {
 const filterPetsByPersonality = async (personality) => {
   const pets = await Pet.find();
   return pets
-    .map(pet => ({ ...pet.toObject(), mood: calculateMood(pet.createdAt) }))
+    .map(pet => ({ ...pet.toObject(), mood: calculateMood(pet.createdAt, pet.adopted) }))
     .filter(pet => pet.personality?.toLowerCase() === personality.toLowerCase());
 };
 
