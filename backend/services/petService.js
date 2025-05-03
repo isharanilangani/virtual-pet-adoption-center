@@ -43,6 +43,13 @@ const filterPetsByPersonality = async (personality) => {
     .filter(pet => pet.personality?.toLowerCase() === personality.toLowerCase());
 };
 
+const filterPetsByPersonality = async (personality) => {
+  const pets = await Pet.find();
+  return pets
+    .map(pet => ({ ...pet.toObject(), mood: calculateMood(pet.createdAt) }))
+    .filter(pet => pet.personality?.toLowerCase() === personality.toLowerCase());
+};
+
 module.exports = {
-  getAllPets, getPetById, addPet, updatePet, adoptPet, deletePet, filterPetsByMood
+  getAllPets, getPetById, addPet, updatePet, adoptPet, deletePet, filterPetsByMood, filterPetsByPersonality
 };
