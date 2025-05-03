@@ -14,6 +14,7 @@ import {
 import { sortPetsByName, checkForSadPets } from "../utils/helpers";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../styles/global.css";
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
