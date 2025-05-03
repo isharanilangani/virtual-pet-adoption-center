@@ -27,3 +27,4 @@ export const sortPetsByName = (pets) => {
   return [...pets].sort((a, b) => a.name.localeCompare(b.name));
 };
 
+

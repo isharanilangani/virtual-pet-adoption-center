@@ -9,3 +9,4 @@ export const updatePet = (id, data) => axios.put(`${API_URL}/${id}`, data);
 export const deletePet = (id) => axios.delete(`${API_URL}/${id}`);
 export const filterPetsByMood = (mood) => axios.get(`${API_URL}/filter`, { params: { mood } });
 export const filterPetsByPersonality = (personality) =>axios.get(`${API_URL}/filter/personality`, { params: { personality } });
+
