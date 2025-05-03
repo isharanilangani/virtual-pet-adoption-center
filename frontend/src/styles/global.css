@@ -1,8 +1,10 @@
 :root {
-  --primary-color: rgba(119, 204, 119, 0.842);
+  --primary-color: rgba(69, 204, 69, 0.842);
   --text-light: rgb(236, 238, 236);
   --btn-hover-color: rgba(3, 82, 3, 0.842);
 }
+
+/* === Landing page styles === */
 
 .landing-page {
   position: relative;
@@ -35,6 +37,8 @@
   z-index: 2;
 }
 
+/* === Home page styles === */
+
 .home-page {
   position: relative;
   height: 100vh;
@@ -55,7 +59,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(236, 253, 233, 0.918);
+  background-color: rgba(253, 253, 253, 0.836);
   z-index: 1;
 }
 
@@ -79,7 +83,63 @@
 
 .btn-outline-light:hover {
   background-color: var(--primary-color);
+  color: var(--text-light);
+}
+
+/* === AddPetForm styles === */
+
+.add-pet-form label {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.add-pet-form input,
+.add-pet-form select {
+  border: 2px solid var(--primary-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  color: #333;
+}
+
+.add-pet-form input:focus,
+.add-pet-form select:focus {
+  outline: none;
+  border-color: var(--btn-hover-color);
+  box-shadow: 0 0 5px var(--btn-hover-color);
+}
+
+.add-pet-form .btn {
+  background-color: var(--primary-color);
+  border: none;
   color: white;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.add-pet-form .btn:hover {
+  background-color: var(--btn-hover-color);
+  color: white;
+}
+
+/* === Modal styles === */
+
+.modal-header {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.modal-header .btn-close {
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.modal-header .btn-close:hover {
+  background-color: var(--btn-hover-color);
+  opacity: 1;
 }
 
 .modal .modal-content {
