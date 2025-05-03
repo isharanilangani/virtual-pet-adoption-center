@@ -27,7 +27,4 @@ export const sortPetsByName = (pets) => {
   return [...pets].sort((a, b) => a.name.localeCompare(b.name));
 };
 
-// Filter pets by mood
-export const filterPetsByMood = (pets, mood) => {
-  return mood ? pets.filter(p => p.mood === mood) : pets;
-};
+

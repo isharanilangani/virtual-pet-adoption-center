@@ -7,6 +7,6 @@ export const addPet = (data) => axios.post(API_URL, data);
 export const adoptPet = (id) => axios.patch(`${API_URL}/${id}/adopt`);
 export const updatePet = (id, data) => axios.put(`${API_URL}/${id}`, data);
 export const deletePet = (id) => axios.delete(`${API_URL}/${id}`);
-export const filterPetsByMood = (mood) => axios.get(`${API_URL}?mood=${mood}`);
+export const filterPetsByMood = (mood) => axios.get(`${API_URL}/filter`, { params: { mood } });
 export const filterPetsByPersonality = (personality) =>axios.get(`${API_URL}/filter/personality`, { params: { personality } });
-  
+

@@ -9,8 +9,9 @@ import {
   deletePet,
   updatePet,
   filterPetsByPersonality,
+  filterPetsByMood,
 } from "../services/api";
-import { filterPetsByMood, sortPetsByName } from "../utils/helpers";
+import { sortPetsByName } from "../utils/helpers";
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
@@ -100,12 +101,17 @@ const HomePage = () => {
         selectedMood={selectedMood}
         onSelectMood={setSelectedMood}
       />
-      <PetList
-        pets={pets}
-        onAdopt={handleAdopt}
-        onDelete={handleDelete}
-        onUpdate={handleUpdate}
-      />
+      {/* Display a message if no pets are found */}
+      {pets.length === 0 ? (
+        <p>No pets available for the selected mood.</p>
+      ) : (
+        <PetList
+          pets={pets}
+          onAdopt={handleAdopt}
+          onDelete={handleDelete}
+          onUpdate={handleUpdate}
+        />
+      )}
     </div>
   );
 };
