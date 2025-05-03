@@ -115,7 +115,7 @@ const HomePage = () => {
           >
             <div className="modal-dialog modal-lg" role="document">
               <div className="modal-content">
-                <div className="modal-header bg-primary text-white">
+                <div className="modal-header">
                   <h5 className="modal-title">Add a New Pet</h5>
                   <button
                     type="button"
