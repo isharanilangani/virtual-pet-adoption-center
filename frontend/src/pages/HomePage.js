@@ -20,6 +20,7 @@ const HomePage = () => {
   const [selectedMood, setSelectedMood] = useState("");
   const [matchedPersonality, setMatchedPersonality] = useState(null);
   const moods = ["Happy", "Excited", "Sad"];
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const fetchPets = useCallback(async () => {
     try {
@@ -86,38 +87,77 @@ const HomePage = () => {
   }, [pets]);
 
   return (
-    <div className="container my-4">
-      <h2 className="mb-4">Pet Adoption Center</h2>
-      <PersonalityQuiz onMatch={handleMatch} />
-      {matchedPersonality && (
-        <button
-          className="btn btn-outline-secondary mt-2"
-          onClick={() => {
-            setMatchedPersonality(null);
-            fetchPets(); // refetch all pets
-          }}
-        >
-          Clear Match
-        </button>
-      )}
-      <AddPetForm onAdd={fetchPets} />
-      <FilterBar
-        moods={moods}
-        selectedMood={selectedMood}
-        onSelectMood={setSelectedMood}
-      />
-      {/* Display a message if no pets are found */}
-      {pets.length === 0 ? (
-        <p>No pets available for the selected mood.</p>
-      ) : (
-        <PetList
-          pets={pets}
-          onAdopt={handleAdopt}
-          onDelete={handleDelete}
-          onUpdate={handleUpdate}
-        />
-      )}
-      <ToastContainer /> {/* This is where the toast notifications will show */}
+    <div className="home-page">
+      <div className="container my-4 text-white">
+        <h2 className="fw-bold mb-4">Pet Adoption Center</h2>
+        <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+          <div className="me-2">
+            <FilterBar
+              moods={moods}
+              selectedMood={selectedMood}
+              onSelectMood={setSelectedMood}
+            />
+          </div>
+          <button
+            className="btn btn-primary mt-2 mt-md-0"
+            onClick={() => setShowAddModal(true)}
+          >
+            Add New Pet
+          </button>
+        </div>
+        {showAddModal && (
+          <div
+            className="modal fade show d-block"
+            tabIndex="-1"
+            role="dialog"
+            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+          >
+            <div className="modal-dialog modal-lg" role="document">
+              <div className="modal-content">
+                <div className="modal-header bg-primary text-white">
+                  <h5 className="modal-title">Add a New Pet</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={() => setShowAddModal(false)}
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <AddPetForm
+                    onAdd={() => {
+                      fetchPets();
+                      setShowAddModal(false);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {pets.length === 0 ? (
+          <p className="mt-3">No pets available for the selected mood.</p>
+        ) : (
+          <PetList
+            pets={pets}
+            onAdopt={handleAdopt}
+            onDelete={handleDelete}
+            onUpdate={handleUpdate}
+          />
+        )}
+        <PersonalityQuiz onMatch={handleMatch} />
+        {matchedPersonality && (
+          <button
+            className="btn btn-outline-light mt-2"
+            onClick={() => {
+              setMatchedPersonality(null);
+              fetchPets(); // refetch all pets
+            }}
+          >
+            Clear Match
+          </button>
+        )}
+        <ToastContainer />
+      </div>
     </div>
   );
 };
