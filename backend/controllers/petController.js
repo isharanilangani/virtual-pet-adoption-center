@@ -1,5 +1,6 @@
 const service = require('../services/petService');
 
+//view all pets
 exports.getAllPets = async (req, res) => {
   try {
     const pets = await service.getAllPets();
@@ -10,6 +11,7 @@ exports.getAllPets = async (req, res) => {
   }
 };
 
+//view pet by pet Id
 exports.getPet = async (req, res) => {
   try {
     const pet = await service.getPetById(req.params.id);
@@ -23,6 +25,7 @@ exports.getPet = async (req, res) => {
   }
 };
 
+//create new pet
 exports.createPet = async (req, res) => {
   try {
     const pet = await service.addPet(req.body);
@@ -33,6 +36,7 @@ exports.createPet = async (req, res) => {
   }
 };
 
+//update pet
 exports.updatePet = async (req, res) => {
   try {
     const updated = await service.updatePet(req.params.id, req.body);
@@ -46,6 +50,7 @@ exports.updatePet = async (req, res) => {
   }
 };
 
+//update adopt status
 exports.adoptPet = async (req, res) => {
   try {
     const adopted = await service.adoptPet(req.params.id);
@@ -59,6 +64,7 @@ exports.adoptPet = async (req, res) => {
   }
 };
 
+//delete pet
 exports.deletePet = async (req, res) => {
   try {
     const deleted = await service.deletePet(req.params.id);
@@ -72,6 +78,7 @@ exports.deletePet = async (req, res) => {
   }
 };
 
+//filter pet by mood
 exports.filterByMood = async (req, res) => {
   try {
     const { mood } = req.query;
@@ -83,6 +90,7 @@ exports.filterByMood = async (req, res) => {
   }
 };
 
+//filter pet by personality
 exports.filterPetsByPersonality = async (req, res) => {
   try {
     const { personality } = req.query;
