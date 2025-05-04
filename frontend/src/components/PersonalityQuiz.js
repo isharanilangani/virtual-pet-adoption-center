@@ -27,11 +27,13 @@ const PersonalityQuiz = ({ onMatch }) => {
   ];
 
   const handleChange = (questionId, answer) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: answer }));
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionId]: answer,
+    }));
   };
 
   const handleSubmit = () => {
-    // Basic scoring logic for personality types
     const score = {
       Calm: 0,
       Playful: 0,
@@ -40,8 +42,9 @@ const PersonalityQuiz = ({ onMatch }) => {
       Friendly: 0,
     };
 
-    Object.entries(answers).forEach(([qId, ans]) => {
-      switch (parseInt(qId)) {
+    for (const [qId, ans] of Object.entries(answers)) {
+      const id = parseInt(qId);
+      switch (id) {
         case 1:
           if (ans === "Low") score.Calm++;
           if (ans === "Medium") score.Friendly++;
@@ -64,27 +67,28 @@ const PersonalityQuiz = ({ onMatch }) => {
         default:
           break;
       }
-    });
+    }
 
-    // Find the highest scoring personality
     const personality = Object.entries(score).reduce((a, b) =>
       a[1] > b[1] ? a : b
     )[0];
+
     onMatch(personality);
   };
 
   return (
     <div className="mb-4 find-pet-section">
-      {questions.map((q) => (
-        <div key={q.id} className="mb-2 question-block">
-          <p>{q.question}</p>
-          {q.options.map((opt) => (
+      {questions.map(({ id, question, options }) => (
+        <div key={id} className="mb-2 question-block">
+          <p>{question}</p>
+          {options.map((opt) => (
             <label key={opt} className="me-3">
               <input
                 type="radio"
-                name={`question-${q.id}`}
+                name={`question-${id}`}
                 value={opt}
-                onChange={() => handleChange(q.id, opt)}
+                checked={answers[id] === opt}
+                onChange={() => handleChange(id, opt)}
               />{" "}
               {opt}
             </label>

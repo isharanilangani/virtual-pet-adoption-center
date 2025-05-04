@@ -12,7 +12,7 @@ const LandingPage = () => {
           profiles, and give them a forever home!
         </p>
         <div className="d-flex justify-content-center gap-3">
-          <Link to="/home" className="btn btn-primary btn-lg px-4">
+          <Link to="/home" className="btn btn-primary btn-lg px-4" aria-label="Go to homepage">
             Get Started
           </Link>
         </div>

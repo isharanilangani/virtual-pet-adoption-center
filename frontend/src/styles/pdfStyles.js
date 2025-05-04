@@ -8,17 +8,17 @@ const pdfStyles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
+    fontWeight: "bold",
     textAlign: "center",
     marginBottom: 30,
-    color: "#4b5320",
-    fontWeight: "bold",
     textDecoration: "underline",
+    color: "#4b5320",
   },
   text: {
     fontSize: 16,
-    marginBottom: 12,
     textAlign: "center",
-    color: "#333",
+    marginBottom: 12,
+    color: "#333333",
   },
   footer: {
     position: "absolute",
@@ -27,7 +27,7 @@ const pdfStyles = StyleSheet.create({
     right: 0,
     fontSize: 12,
     textAlign: "center",
-    color: "#777",
+    color: "#777777",
   },
 });
 
