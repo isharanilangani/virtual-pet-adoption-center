@@ -241,6 +241,36 @@
   object-fit: contain;
 }
 
+/* === petCard styles === */
+
+.card {
+  border-radius: 1rem;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card .text-custom {
+  color: var(--text-dark);
+}
+
+.card .text-muted {
+  font-style: italic;
+  color: var(--text-dark);
+}
+
+.card .text-success {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.btn svg {
+  margin-right: 4px;
+}
+
 .fade-in {
   animation: fadeIn 0.5s ease-in;
 }

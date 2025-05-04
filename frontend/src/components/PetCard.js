@@ -34,7 +34,7 @@ const PetCard = React.memo(({ pet, onAdopt, onDelete, onUpdate }) => {
   return (
     <>
       {showConfetti && <Confetti width={width} height={height} />}
-      <div className={`card mb-3 shadow-sm fade-in`}>
+      <div className="card mb-3 shadow-sm fade-in">
         <div className="card-body">
           {editing ? (
             <>
@@ -59,10 +59,12 @@ const PetCard = React.memo(({ pet, onAdopt, onDelete, onUpdate }) => {
             </>
           ) : (
             <>
-              <h5>{pet.name}</h5>
-              <p>Species: {pet.species}</p>
-              <p>Personality: {pet.personality}</p>
-              <p>
+              <h5 className="text-custom">{pet.name}</h5>
+              <p className="text-custom">Species: {pet.species}</p>
+              <p className="text-custom">
+                Personality: {pet.personality}
+              </p>
+              <p className="text-custom">
                 Mood: {getMoodIcon(pet.mood)} {pet.mood}
               </p>
               <p
@@ -72,7 +74,7 @@ const PetCard = React.memo(({ pet, onAdopt, onDelete, onUpdate }) => {
               >
                 Status: {pet.adopted ? "Adopted" : "Available"}
               </p>
-              <div className="d-flex gap-2">
+              <div className="d-flex flex-wrap gap-2">
                 {!pet.adopted && (
                   <button
                     className="btn btn-sm btn-success"
@@ -81,13 +83,28 @@ const PetCard = React.memo(({ pet, onAdopt, onDelete, onUpdate }) => {
                     Adopt
                   </button>
                 )}
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() => setEditing(true)}
+                >
+                  <FaEdit /> Edit
+                </button>
+                <button
+                  className="btn btn-sm btn-outline-danger"
+                  onClick={() => onDelete(pet._id)}
+                >
+                  <FaTrash /> Delete
+                </button>
                 {pet.adopted && (
                   <PDFDownloadLink
                     document={
-                      <AdoptionCertificate pet={pet} adopter="John Doe" />
+                      <AdoptionCertificate
+                        pet={pet}
+                        adopter="A. B. C. Perera"
+                      />
                     }
                     fileName={`${pet.name}_adoption_certificate.pdf`}
-                    className="btn btn-sm btn-outline-secondary mt-2 d-inline-flex align-items-center"
+                    className="btn btn-sm btn-outline-secondary d-inline-flex align-items-center"
                   >
                     {({ loading }) =>
                       loading ? (
@@ -95,23 +112,12 @@ const PetCard = React.memo(({ pet, onAdopt, onDelete, onUpdate }) => {
                       ) : (
                         <>
                           <FaDownload className="me-1" />
+                          Certificate
                         </>
                       )
                     }
                   </PDFDownloadLink>
                 )}
-                <button
-                  className="btn btn-sm btn-outline-primary"
-                  onClick={() => setEditing(true)}
-                >
-                  <FaEdit />
-                </button>
-                <button
-                  className="btn btn-sm btn-danger"
-                  onClick={() => onDelete(pet._id)}
-                >
-                  <FaTrash />
-                </button>
               </div>
             </>
           )}
