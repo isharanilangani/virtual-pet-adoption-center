@@ -3,6 +3,11 @@
 A full-stack web application that allows users to manage, filter, and adopt virtual pets. Built with **Node.js** and **React.js**, this project emphasizes clean architecture, attractive UI, and user-friendly functionality.
 
 ---
+**## Demo**
+
+[Live Demo](https://drive.google.com/file/d/1rCAZn7pOYkrBF79zjfQTqCgFWwiJqGbi/view?usp=sharing)
+
+---
 
 **## Objective**
 
@@ -128,12 +133,6 @@ npm start
 
 - Node.js v16+
 - MongoDB installed and running locally
-
----
-
-## Demo
-
-[Live Demo](https://drive.google.com/file/d/1rCAZn7pOYkrBF79zjfQTqCgFWwiJqGbi/view?usp=sharing)
 
 ---
 
