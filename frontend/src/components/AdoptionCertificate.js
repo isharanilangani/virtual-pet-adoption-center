@@ -10,6 +10,7 @@ const AdoptionCertificate = ({ pet, adopter }) => (
       <Text style={pdfStyles.text}>Species: {pet.species}</Text>
       <Text style={pdfStyles.text}>Personality: {pet.personality}</Text>
       <Text style={pdfStyles.text}>Date: {new Date().toLocaleDateString()}</Text>
+      <Text style={pdfStyles.footer}>Thank you for giving {pet.name} a loving home!</Text>
     </Page>
   </Document>
 );
