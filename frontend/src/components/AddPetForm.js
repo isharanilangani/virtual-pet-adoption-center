@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { addPet } from "../services/api";
 import "../styles/global.css";
 
@@ -10,15 +10,16 @@ const AddPetForm = ({ onAdd }) => {
     personality: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addPet(formData);
     setFormData({ name: "", species: "", age: "", personality: "" });
-    onAdd();
+    onAdd?.();
   };
 
   const personalityOptions = [
@@ -32,8 +33,11 @@ const AddPetForm = ({ onAdd }) => {
   return (
     <form onSubmit={handleSubmit} className="row g-3 add-pet-form">
       <div className="col-md-6">
-        <label className="form-label primary-label">Name</label>
+        <label htmlFor="name" className="form-label primary-label">
+          Name
+        </label>
         <input
+          id="name"
           type="text"
           name="name"
           value={formData.name}
@@ -43,9 +47,13 @@ const AddPetForm = ({ onAdd }) => {
           required
         />
       </div>
+
       <div className="col-md-6">
-        <label className="form-label primary-label">Species</label>
+        <label htmlFor="species" className="form-label primary-label">
+          Species
+        </label>
         <input
+          id="species"
           type="text"
           name="species"
           value={formData.species}
@@ -55,21 +63,30 @@ const AddPetForm = ({ onAdd }) => {
           required
         />
       </div>
+
       <div className="col-md-6">
-        <label className="form-label primary-label">Age</label>
+        <label htmlFor="age" className="form-label primary-label">
+          Age
+        </label>
         <input
+          id="age"
           type="number"
           name="age"
           value={formData.age}
           onChange={handleChange}
           className="form-control primary-input"
           placeholder="e.g., 3"
+          min="0"
           required
         />
       </div>
+
       <div className="col-md-6">
-        <label className="form-label primary-label">Personality</label>
+        <label htmlFor="personality" className="form-label primary-label">
+          Personality
+        </label>
         <select
+          id="personality"
           name="personality"
           value={formData.personality}
           onChange={handleChange}
@@ -86,6 +103,7 @@ const AddPetForm = ({ onAdd }) => {
           ))}
         </select>
       </div>
+
       <div className="col-12 text-end">
         <button type="submit" className="btn primary-btn">
           Add Pet

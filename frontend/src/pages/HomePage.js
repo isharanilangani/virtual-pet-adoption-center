@@ -21,9 +21,10 @@ const HomePage = () => {
   const [pets, setPets] = useState([]);
   const [selectedMood, setSelectedMood] = useState("");
   const [matchedPersonality, setMatchedPersonality] = useState(null);
-  const moods = ["Happy", "Excited", "Sad"];
   const [showAddModal, setShowAddModal] = useState(false);
   const [showQuizModal, setShowQuizModal] = useState(false);
+
+  const moods = ["Happy", "Excited", "Sad"];
 
   const fetchPets = useCallback(async () => {
     try {
@@ -44,6 +45,10 @@ const HomePage = () => {
   useEffect(() => {
     fetchPets();
   }, [selectedMood, fetchPets]);
+
+  useEffect(() => {
+    checkForSadPets(pets);
+  }, [pets]);
 
   const handleAdopt = useCallback(
     async (id) => {
@@ -71,7 +76,6 @@ const HomePage = () => {
 
   const handleMatch = async (personality) => {
     setMatchedPersonality(personality);
-    console.log("Matched personality:", personality);
     try {
       const res = await filterPetsByPersonality(personality);
       if (Array.isArray(res.data)) {
@@ -85,14 +89,33 @@ const HomePage = () => {
     }
   };
 
-  useEffect(() => {
-    checkForSadPets(pets); // Check for sad pets when pets data changes
-  }, [pets]);
+  const Modal = ({ show, onHide, children, title }) => (
+    <div
+      className={`modal fade show ${show ? "d-block" : ""}`}
+      tabIndex="-1"
+      role="dialog"
+    >
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">{title}</h5>
+            <button
+              type="button"
+              className="btn-close"
+              onClick={onHide}
+            ></button>
+          </div>
+          <div className="modal-body">{children}</div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="home-page">
       <div className="container my-4 text-white">
         <h2 className="fw-bold mb-4">Pet Adoption Center</h2>
+
         <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap">
           <div className="me-2">
             <FilterBar
@@ -107,7 +130,7 @@ const HomePage = () => {
                 className="btn btn-warning mt-2 mt-md-0"
                 onClick={() => {
                   setMatchedPersonality(null);
-                  setSelectedMood(""); // Reset mood if needed
+                  setSelectedMood("");
                   fetchPets();
                 }}
               >
@@ -122,36 +145,6 @@ const HomePage = () => {
             </button>
           </div>
         </div>
-
-        {showAddModal && (
-          <div
-            className="modal fade show d-block"
-            tabIndex="-1"
-            role="dialog"
-            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-          >
-            <div className="modal-dialog modal-lg" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Add a New Pet</h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    onClick={() => setShowAddModal(false)}
-                  ></button>
-                </div>
-                <div className="modal-body">
-                  <AddPetForm
-                    onAdd={() => {
-                      fetchPets();
-                      setShowAddModal(false);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         {pets.length === 0 ? (
           <p className="mt-3">No pets available for the selected mood.</p>
@@ -172,35 +165,32 @@ const HomePage = () => {
             title="Take Personality Quiz"
           />
         </div>
-        {showQuizModal && (
-          <div
-            className="modal fade show d-block"
-            tabIndex="-1"
-            role="dialog"
-            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-          >
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Personality Quiz</h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    onClick={() => setShowQuizModal(false)}
-                  ></button>
-                </div>
-                <div className="modal-body">
-                  <PersonalityQuiz
-                    onMatch={(personality) => {
-                      handleMatch(personality);
-                      setShowQuizModal(false);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+
+        <Modal
+          show={showAddModal}
+          onHide={() => setShowAddModal(false)}
+          title="Add a New Pet"
+        >
+          <AddPetForm
+            onAdd={() => {
+              fetchPets();
+              setShowAddModal(false);
+            }}
+          />
+        </Modal>
+
+        <Modal
+          show={showQuizModal}
+          onHide={() => setShowQuizModal(false)}
+          title="Personality Quiz"
+        >
+          <PersonalityQuiz
+            onMatch={(personality) => {
+              handleMatch(personality);
+              setShowQuizModal(false);
+            }}
+          />
+        </Modal>
 
         <ToastContainer />
       </div>
