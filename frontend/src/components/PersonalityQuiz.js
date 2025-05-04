@@ -75,7 +75,6 @@ const PersonalityQuiz = ({ onMatch }) => {
 
   return (
     <div className="mb-4 find-pet-section">
-      <h3>Find Your Perfect Pet</h3>
       {questions.map((q) => (
         <div key={q.id} className="mb-2 question-block">
           <p>{q.question}</p>
