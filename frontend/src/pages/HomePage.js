@@ -168,7 +168,7 @@ const HomePage = () => {
           <img
             src={dogGif}
             alt="Take Personality Quiz"
-            className="img-fluid"
+            className="img-fluid large-dog-gif"
             title="Take Personality Quiz"
           />
         </div>
