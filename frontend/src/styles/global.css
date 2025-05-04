@@ -12,7 +12,7 @@
   position: relative;
   height: 100vh;
   width: 100%;
-  background-image: url("./assets/bg.jpg");
+  background-image: url("../assets/bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -45,7 +45,7 @@
   position: relative;
   height: 100vh;
   width: 100%;
-  background-image: url("./assets/bg.jpg");
+  background-image: url("../assets/bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -156,7 +156,7 @@
 }
 
 .filter-bar .form-select {
-  width: fit-content; 
+  width: fit-content;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -168,6 +168,77 @@
   outline: none;
   border-color: var(--btn-hover-color);
   box-shadow: 0 0 5px var(--btn-hover-color);
+}
+
+/* === personalityQuiz styles === */
+
+.find-pet-section {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.find-pet-section h3 {
+  font-size: 1.75rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.find-pet-section .question-block {
+  margin-bottom: 1rem;
+}
+
+.find-pet-section .question-block p {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.find-pet-section label {
+  margin-right: 1rem;
+  font-weight: 400;
+  color: #555;
+}
+
+.find-pet-section input[type="radio"] {
+  margin-right: 0.25rem;
+  accent-color: var(--primary-color); /* for modern browsers */
+}
+
+.find-pet-section .btn {
+  background-color: var(--primary-color);
+  border: none;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.4rem;
+  transition: background-color 0.3s ease;
+}
+
+.find-pet-section .btn:hover {
+  background-color: var(--btn-hover-color);
+}
+
+.pet-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1050;
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.pet-icon:hover {
+  transform: scale(1.1);
+}
+
+.pet-icon img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
 }
 
 .fade-in {
