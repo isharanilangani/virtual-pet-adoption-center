@@ -242,6 +242,11 @@
   object-fit: contain;
 }
 
+.pet-icon .large-dog-gif {
+  width: 150px;
+  height: 150px;
+}
+
 /* === petCard styles === */
 
 .card {
