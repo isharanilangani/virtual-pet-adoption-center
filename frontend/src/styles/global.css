@@ -12,7 +12,7 @@
   position: relative;
   height: 100vh;
   width: 100%;
-  background-image: url('./assets/bg.jpg');
+  background-image: url("./assets/bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -24,7 +24,7 @@
 }
 
 .landing-page::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -45,7 +45,7 @@
   position: relative;
   height: 100vh;
   width: 100%;
-  background-image: url('./assets/bg.jpg');
+  background-image: url("./assets/bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -55,7 +55,7 @@
 }
 
 .home-page::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -153,24 +153,18 @@
 .filter-bar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
 }
 
-.filter-bar label {
-  color: var(--text-dark);
-  font-weight: 500;
+.filter-bar .form-select {
+  width: fit-content; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 0.3rem;
+  border: 1px solid var(--text-input);
 }
 
-.filter-bar select {
-  border: 1px solid var(--primary-color);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  color: var(--text-dark);
-  background-color: var(--text-light);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.filter-bar select:focus {
+.filter-bar .form-select:focus {
   outline: none;
   border-color: var(--btn-hover-color);
   box-shadow: 0 0 5px var(--btn-hover-color);
@@ -181,13 +175,21 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes bgZoom {
-  0% { background-size: 100%; }
-  100% { background-size: 120%; }
+  0% {
+    background-size: 100%;
+  }
+  100% {
+    background-size: 120%;
+  }
 }
 
 .btn-primary {
