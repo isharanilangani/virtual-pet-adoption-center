@@ -35,6 +35,8 @@ A full-stack web application that allows users to manage, filter, and adopt virt
 - @react-pdf/renderer
 - @react-hook/window-size
 - react-router-dom
+  
+---
 
 **## Installation Instructions**
 
@@ -79,6 +81,8 @@ npm install bootstrap axios react-toastify @react-pdf/renderer react-confetti @r
 
 npm start
 
+---
+
 **## Project structure**
 
 /backend
@@ -118,10 +122,14 @@ npm start
 │   └── /utils
 │       └── helpers.js
 
+---
+
 **## Requirements**
 
 - Node.js v16+
 - MongoDB installed and running locally
+
+---
 
 **## Author**
 G I N Dabarera
