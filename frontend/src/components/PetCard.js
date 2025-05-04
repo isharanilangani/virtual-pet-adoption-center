@@ -74,9 +74,31 @@ const PetCard = React.memo(({ pet, onAdopt, onDelete, onUpdate }) => {
               </p>
               <div className="d-flex gap-2">
                 {!pet.adopted && (
-                  <button className="btn btn-sm btn-success" onClick={handleAdopt}>
+                  <button
+                    className="btn btn-sm btn-success"
+                    onClick={handleAdopt}
+                  >
                     Adopt
                   </button>
+                )}
+                {pet.adopted && (
+                  <PDFDownloadLink
+                    document={
+                      <AdoptionCertificate pet={pet} adopter="John Doe" />
+                    }
+                    fileName={`${pet.name}_adoption_certificate.pdf`}
+                    className="btn btn-sm btn-outline-secondary mt-2 d-inline-flex align-items-center"
+                  >
+                    {({ loading }) =>
+                      loading ? (
+                        "Loading..."
+                      ) : (
+                        <>
+                          <FaDownload className="me-1" />
+                        </>
+                      )
+                    }
+                  </PDFDownloadLink>
                 )}
                 <button
                   className="btn btn-sm btn-outline-primary"
@@ -92,18 +114,6 @@ const PetCard = React.memo(({ pet, onAdopt, onDelete, onUpdate }) => {
                 </button>
               </div>
             </>
-          )}
-
-          {pet.adopted && (
-            <PDFDownloadLink
-              document={<AdoptionCertificate pet={pet} adopter="John Doe" />}
-              fileName={`${pet.name}_adoption_certificate.pdf`}
-              className="btn btn-sm btn-outline-secondary mt-2 d-inline-flex align-items-center"
-            >
-              {({ loading }) =>
-                loading ? "Loading..." : <><FaDownload className="me-1" /> Download Certificate</>
-              }
-            </PDFDownloadLink>
           )}
         </div>
       </div>

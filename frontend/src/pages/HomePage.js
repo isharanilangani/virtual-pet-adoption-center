@@ -15,6 +15,7 @@ import { sortPetsByName, checkForSadPets } from "../utils/helpers";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/global.css";
+import dogGif from "../assets/animated-dog.gif";
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
@@ -22,6 +23,7 @@ const HomePage = () => {
   const [matchedPersonality, setMatchedPersonality] = useState(null);
   const moods = ["Happy", "Excited", "Sad"];
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showQuizModal, setShowQuizModal] = useState(false);
 
   const fetchPets = useCallback(async () => {
     try {
@@ -99,13 +101,28 @@ const HomePage = () => {
               onSelectMood={setSelectedMood}
             />
           </div>
-          <button
-            className="btn btn-primary mt-2 mt-md-0"
-            onClick={() => setShowAddModal(true)}
-          >
-            Add New Pet
-          </button>
+          <div className="d-flex gap-2">
+            {matchedPersonality && (
+              <button
+                className="btn btn-warning mt-2 mt-md-0"
+                onClick={() => {
+                  setMatchedPersonality(null);
+                  setSelectedMood(""); // Reset mood if needed
+                  fetchPets();
+                }}
+              >
+                Clear Personality Filter
+              </button>
+            )}
+            <button
+              className="btn btn-primary mt-2 mt-md-0"
+              onClick={() => setShowAddModal(true)}
+            >
+              Add New Pet
+            </button>
+          </div>
         </div>
+
         {showAddModal && (
           <div
             className="modal fade show d-block"
@@ -135,6 +152,7 @@ const HomePage = () => {
             </div>
           </div>
         )}
+
         {pets.length === 0 ? (
           <p className="mt-3">No pets available for the selected mood.</p>
         ) : (
@@ -145,18 +163,45 @@ const HomePage = () => {
             onUpdate={handleUpdate}
           />
         )}
-        <PersonalityQuiz onMatch={handleMatch} />
-        {matchedPersonality && (
-          <button
-            className="btn btn-outline-light mt-2"
-            onClick={() => {
-              setMatchedPersonality(null);
-              fetchPets(); // refetch all pets
-            }}
+
+        <div className="pet-icon" onClick={() => setShowQuizModal(true)}>
+          <img
+            src={dogGif}
+            alt="Take Personality Quiz"
+            className="img-fluid"
+            title="Take Personality Quiz"
+          />
+        </div>
+        {showQuizModal && (
+          <div
+            className="modal fade show d-block"
+            tabIndex="-1"
+            role="dialog"
+            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
           >
-            Clear Match
-          </button>
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Personality Quiz</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={() => setShowQuizModal(false)}
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <PersonalityQuiz
+                    onMatch={(personality) => {
+                      handleMatch(personality);
+                      setShowQuizModal(false);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         )}
+
         <ToastContainer />
       </div>
     </div>
