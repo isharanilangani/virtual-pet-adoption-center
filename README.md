@@ -47,8 +47,8 @@ A full-stack web application that allows users to manage, filter, and adopt virt
 
 **### 1. Clone the Repository**
 
-git clone https://github.com/your-username/virtual-pet-adoption-center.git
-cd virtual-pet-adoption-center
+-git clone https://github.com/your-username/virtual-pet-adoption-center.git
+-cd virtual-pet-adoption-center
 
 **### 2. Backend Setup**
 
