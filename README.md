@@ -47,30 +47,30 @@ A full-stack web application that allows users to manage, filter, and adopt virt
 
 **### 1. Clone the Repository**
 
--git clone https://github.com/your-username/virtual-pet-adoption-center.git
--cd virtual-pet-adoption-center
+- git clone https://github.com/your-username/virtual-pet-adoption-center.git
+- cd virtual-pet-adoption-center
 
 **### 2. Backend Setup**
 
-cd backend
-npm init -y
-npm install express mongoose dotenv cors
-npm install nodemon --save-dev
+- cd backend
+- npm init -y
+- npm install express mongoose dotenv cors
+- npm install nodemon --save-dev
 
 **### 3. Create Backend .env**
 
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/pet-adoption-center
+- PORT=5000
+- MONGO_URI=mongodb://localhost:27017/pet-adoption-center
 
 **### 4. Run the server**
 
-npm start
+- npm start
 
 **## 5.Frontend Setup**
 
-cd frontend
-npm install
-npm install bootstrap axios react-toastify @react-pdf/renderer react-confetti @react-hook/window-size
+- cd frontend
+- npm install
+- npm install bootstrap axios react-toastify @react-pdf/renderer react-confetti @react-hook/window-size
 
 **## 5.Frontend Required Packeges**
 
@@ -83,48 +83,7 @@ npm install bootstrap axios react-toastify @react-pdf/renderer react-confetti @r
 
 **## 6.Start the react app**
 
-npm start
-
----
-
-**## Project structure**
-
-/backend
-├── app.js
-├── server.js
-├── /routes
-│   └── petRoutes.js
-├── /controllers
-│   └── petController.js
-├── /models
-│   └── petModel.js
-├── /services
-│   └── petService.js
-├── /utils
-│   └── moodLogic.js
-└── /data
-    └── pets.json (optional if using temp storage)
-
-
-/frontend
-├── public/
-├── src/
-|   ├── /assts
-│   ├── App.js
-│   ├── index.js
-│   ├── /components
-│   │   ├── PetList.js
-│   │   ├── PetCard.js
-│   │   ├── AddPetForm.js
-│   │   ├── FilterBar.js
-│   ├── /pages
-│   │   └── HomePage.js
-│   ├── /services
-│   │   └── api.js
-│   ├── /styles
-│   │   └── global.css
-│   └── /utils
-│       └── helpers.js
+- npm start
 
 ---
 
